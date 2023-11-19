@@ -3,16 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   EuiPanel,
   EuiTitle,
-  EuiLink,
-  EuiIcon,
   EuiTextArea,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiText,
+  EuiFieldText,
+  EuiAccordion,
 } from '@elastic/eui';
 import { FormattedMessage } from '@osd/i18n/react';
 
@@ -21,53 +20,59 @@ import { DrilldownVisParams } from './types';
 
 function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
   const onMarkdownUpdate = useCallback(
-    (value: DrilldownVisParams['markdown']) => setValue('markdown', value),
+    (value: DrilldownVisParams['cardName']) => setValue('cardName', value),
+    [setValue]
+  );
+
+  const onDescriptionUpdate = useCallback(
+    (value: DrilldownVisParams['cardDescription']) => setValue('cardDescription', value),
     [setValue]
   );
 
   return (
-    <EuiPanel paddingSize="s">
-      <EuiFlexGroup direction="column" gutterSize="m" className="eui-fullHeight">
-        <EuiFlexItem grow={false}>
-          <EuiFlexGroup gutterSize="none" justifyContent="spaceBetween" alignItems="baseline">
-            <EuiFlexItem grow={false}>
-              <EuiTitle size="xs">
-                <h2>
-                  <label htmlFor="markdownVisInput">Markdown</label>
-                </h2>
-              </EuiTitle>
-            </EuiFlexItem>
+    <EuiAccordion buttonContent="Drilldown 1">
+      <EuiPanel paddingSize="s">
+        <EuiFlexGroup direction="column" gutterSize="m" className="eui-fullHeight">
+          <EuiFlexItem>
+            <EuiTitle size="xs">
+              <h2>
+                <label htmlFor="drilldownVisInput">Card Name</label>
+              </h2>
+            </EuiTitle>
+          </EuiFlexItem>
 
-            <EuiFlexItem grow={false}>
-              <EuiText size="xs">
-                <EuiLink
-                  href="https://help.github.com/articles/github-flavored-markdown/"
-                  target="_blank"
-                >
-                  <FormattedMessage
-                    id="visTypeMarkdown.params.helpLinkLabel"
-                    defaultMessage="Help"
-                  />{' '}
-                  <EuiIcon type="popout" size="s" />
-                </EuiLink>
-              </EuiText>
-            </EuiFlexItem>
-          </EuiFlexGroup>
-        </EuiFlexItem>
+          <EuiFlexItem>
+            <EuiFieldText
+              id="drilldownVisInput"
+              placeholder="Placeholder text"
+              className="eui-fullHeight"
+              value={stateParams.cardName}
+              onChange={({ target: { value } }) => onMarkdownUpdate(value)}
+              fullWidth={true}
+            />
+          </EuiFlexItem>
 
-        <EuiFlexItem>
-          <EuiTextArea
-            id="markdownVisInput"
-            className="eui-fullHeight"
-            value={stateParams.markdown}
-            onChange={({ target: { value } }) => onMarkdownUpdate(value)}
-            fullWidth={true}
-            data-test-subj="markdownTextarea"
-            resize="none"
-          />
-        </EuiFlexItem>
-      </EuiFlexGroup>
-    </EuiPanel>
+          <EuiFlexItem>
+            <EuiTitle size="xs">
+              <h2>
+                <label htmlFor="drilldownVisInput">Description</label>
+              </h2>
+            </EuiTitle>
+          </EuiFlexItem>
+
+          <EuiFlexItem>
+            <EuiTextArea
+              id="markdownVisInput"
+              className="eui-fullHeight"
+              value={stateParams.cardDescription}
+              onChange={({ target: { value } }) => onDescriptionUpdate(value)}
+              fullWidth={true}
+              data-test-subj="markdownTextarea"
+            />
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </EuiPanel>
+    </EuiAccordion>
   );
 }
 

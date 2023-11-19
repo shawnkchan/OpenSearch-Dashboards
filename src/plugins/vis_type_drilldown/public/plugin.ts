@@ -12,14 +12,26 @@ import {
 } from './types';
 import { PLUGIN_NAME } from '../common';
 import { drillDownVisDefinition } from './drilldown_vis';
+import { createDrilldownVisFn } from './drilldown_fn';
+import { VisualizationsSetup } from '../../visualizations/public';
+import { Plugin as ExpressionsPublicPlugin } from '../../expressions/public';
+import { drilldownVisRenderer } from './drilldown_renderer';
+
+export interface DrilldownPluginSetupDependencies {
+  expressions: ReturnType<ExpressionsPublicPlugin['setup']>;
+  visualizations: VisualizationsSetup;
+}
 
 export class VisDrilldownPlugin
   implements Plugin<VisDrilldownPluginSetup, VisDrilldownPluginStart> {
   public setup(
     core: CoreSetup,
-    { visualizations }: AppPluginStartDependencies
+    { visualizations, expressions }: DrilldownPluginSetupDependencies
   ): VisDrilldownPluginSetup {
     visualizations.createBaseVisualization(drillDownVisDefinition);
+    expressions.registerRenderer(drilldownVisRenderer);
+    expressions.registerFunction(createDrilldownVisFn);
+
     // Register an application into the side navigation menu
     core.application.register({
       id: 'visTypeDrilldown',

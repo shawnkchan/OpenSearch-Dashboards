@@ -6,61 +6,70 @@
 import { i18n } from '@osd/i18n';
 import { ExpressionFunctionDefinition, Render } from '../../expressions/public';
 import { DrilldownVisParams } from './types';
-import { Arguments } from '../../vis_type_markdown/public/types';
+import { DrilldownArguments } from './types';
 
 export interface DrilldownVisRenderValue {
-  visType: 'markdown';
+  visType: 'drilldown';
   visParams: DrilldownVisParams;
 }
 
 export type DrilldownVisExpressionFunctionDefinition = ExpressionFunctionDefinition<
-  'markdownVis',
+  'drilldownVis',
   unknown,
-  Arguments,
+  DrilldownArguments,
   Render<DrilldownVisRenderValue>
 >;
 
-export const createMarkdownVisFn = (): DrilldownVisExpressionFunctionDefinition => ({
-  name: 'markdownVis',
+export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition => ({
+  name: 'drilldownVis',
   type: 'render',
   inputTypes: [],
-  help: i18n.translate('visTypeMarkdown.function.help', {
-    defaultMessage: 'Markdown visualization',
+  help: i18n.translate('visDrilldown.function.help', {
+    defaultMessage: 'Drilldown visualization',
   }),
   args: {
-    markdown: {
+    // font: {
+    //   types: ['style'],
+    //   help: i18n.translate('visTypeMarkdown.function.font.help', {
+    //     defaultMessage: 'Font settings.',
+    //   }),
+    //   default: `{font size=12}`,
+    // },
+    // openLinksInNewTab: {
+    //   types: ['boolean'],
+    //   default: false,
+    //   help: i18n.translate('visTypeMarkdown.function.openLinksInNewTab.help', {
+    //     defaultMessage: 'Opens links in new tab',
+    //   }),
+    // },
+    cardName: {
       types: ['string'],
       aliases: ['_'],
       required: true,
-      help: i18n.translate('visTypeMarkdown.function.markdown.help', {
-        defaultMessage: 'Markdown to render',
+      help: i18n.translate('visTypeDrilldown.function.cardName.help', {
+        defaultMessage: 'Card name',
       }),
     },
-    font: {
-      types: ['style'],
-      help: i18n.translate('visTypeMarkdown.function.font.help', {
-        defaultMessage: 'Font settings.',
-      }),
-      default: `{font size=12}`,
-    },
-    openLinksInNewTab: {
-      types: ['boolean'],
-      default: false,
-      help: i18n.translate('visTypeMarkdown.function.openLinksInNewTab.help', {
-        defaultMessage: 'Opens links in new tab',
+    cardDescription: {
+      types: ['string'],
+      aliases: ['_'],
+      required: true,
+      help: i18n.translate('visTypeDrilldown.function.cardDescription.help', {
+        defaultMessage: 'Card description',
       }),
     },
   },
   fn(input, args) {
     return {
       type: 'render',
-      as: 'markdown_vis',
+      as: 'drilldown_vis',
       value: {
-        visType: 'markdown',
+        visType: 'drilldown',
         visParams: {
-          markdown: args.markdown,
-          openLinksInNewTab: args.openLinksInNewTab,
-          fontSize: parseInt(args.font.spec.fontSize || '12', 10),
+          cardName: args.cardName,
+          cardDescription: args.cardDescription,
+          // openLinksInNewTab: args.openLinksInNewTab,
+          // fontSize: parseInt(args.font.spec.fontSize || '12', 10),
         },
       },
     };

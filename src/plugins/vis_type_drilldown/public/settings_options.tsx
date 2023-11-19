@@ -14,7 +14,8 @@ import { DrilldownVisParams } from './types';
 function SettingsOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
   return (
     <EuiPanel paddingSize="s">
-      <RangeOption
+      <p>Cool</p>
+      {/* <RangeOption
         label={i18n.translate('visTypeMarkdown.params.fontSizeLabel', {
           defaultMessage: 'Base font size in points',
         })}
@@ -33,7 +34,7 @@ function SettingsOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVis
         paramName="openLinksInNewTab"
         value={stateParams.openLinksInNewTab}
         setValue={setValue}
-      />
+      /> */}
     </EuiPanel>
   );
 }

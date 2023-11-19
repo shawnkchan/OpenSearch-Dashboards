@@ -24,8 +24,18 @@ export interface AppPluginStartDependencies {
 //   openLinksInNewTab: boolean;
 // }
 
+// export interface DrilldownVisParams {
+//   markdown: Arguments['markdown'];
+//   openLinksInNewTab: Arguments['openLinksInNewTab'];
+//   fontSize: number;
+// }
+
+export interface DrilldownArguments {
+  cardName: string;
+  cardDescription: string;
+}
+
 export interface DrilldownVisParams {
-  markdown: Arguments['markdown'];
-  openLinksInNewTab: Arguments['openLinksInNewTab'];
-  fontSize: number;
+  cardName: DrilldownArguments['cardName'];
+  cardDescription: DrilldownArguments['cardDescription'];
 }
