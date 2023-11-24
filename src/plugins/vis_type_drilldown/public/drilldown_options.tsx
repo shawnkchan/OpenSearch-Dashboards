@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, Fragment, useState, useEffect } from 'react';
 import {
   EuiPanel,
   EuiTitle,
@@ -12,11 +12,13 @@ import {
   EuiFlexItem,
   EuiFieldText,
   EuiAccordion,
+  EuiSuperSelect,
+  EuiText,
 } from '@elastic/eui';
-import { FormattedMessage } from '@osd/i18n/react';
 
 import { VisOptionsProps } from 'src/plugins/vis_default_editor/public';
-import { DrilldownVisParams } from './types';
+import { useOpenSearchDashboards } from 'src/plugins/opensearch_dashboards_react/public';
+import { DrilldownServices, DrilldownVisParams } from './types';
 
 function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
   const onMarkdownUpdate = useCallback(
@@ -24,10 +26,57 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
     [setValue]
   );
 
+  const {
+    services: { savedObjectsClient },
+  } = useOpenSearchDashboards<DrilldownServices>();
+
+  useEffect(() => {
+    const savedObject = savedObjectsClient.find({
+      type: 'dashboard',
+    });
+  });
+
   const onDescriptionUpdate = useCallback(
     (value: DrilldownVisParams['cardDescription']) => setValue('cardDescription', value),
     [setValue]
   );
+
+  const activeVisName = '';
+  const handleVisTypeChange = () => {};
+  const options = [
+    {
+      value: '1',
+      inputDisplay: 'Option 1',
+      dropdownDisplay: (
+        <Fragment>
+          <strong>Name</strong>
+          <EuiText size="s" color="subdued">
+            <p className="euiTextColor--subdued">
+              id
+              <br />
+              text
+            </p>
+          </EuiText>
+        </Fragment>
+      ),
+    },
+    {
+      value: '2',
+      inputDisplay: 'Option 2',
+      dropdownDisplay: (
+        <Fragment>
+          <strong>Name</strong>
+          <EuiText size="s" color="subdued">
+            <p className="euiTextColor--subdued">
+              id
+              <br />
+              text
+            </p>
+          </EuiText>
+        </Fragment>
+      ),
+    },
+  ];
 
   return (
     <EuiAccordion buttonContent="Drilldown 1">
@@ -70,6 +119,22 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
               data-test-subj="markdownTextarea"
             />
           </EuiFlexItem>
+
+          <EuiFlexItem>
+            <EuiTitle size="xs">
+              <h2>
+                <label htmlFor="drilldownVisInput">Select a Destination</label>
+              </h2>
+            </EuiTitle>
+          </EuiFlexItem>
+
+          <EuiSuperSelect
+            options={options}
+            valueOfSelected={activeVisName}
+            onChange={handleVisTypeChange}
+            fullWidth
+            data-test-subj="chartPicker"
+          />
         </EuiFlexGroup>
       </EuiPanel>
     </EuiAccordion>

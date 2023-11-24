@@ -13,5 +13,6 @@
     "data",
     "visDefaultEditor"
   ],
-  "optionalPlugins": []
+  "optionalPlugins": [],
+  "requiredBundles": ["opensearchDashboardsUtils", "opensearchDashboardsReact", "home"]
 }
