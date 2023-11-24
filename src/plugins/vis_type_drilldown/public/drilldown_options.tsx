@@ -31,7 +31,7 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
   } = useOpenSearchDashboards<DrilldownServices>();
 
   useEffect(() => {
-    const savedObject = savedObjectsClient.find({
+    const saved = savedObjectsClient.find({
       type: 'dashboard',
     });
   });
