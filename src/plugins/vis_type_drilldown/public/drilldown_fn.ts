@@ -5,8 +5,7 @@
 
 import { i18n } from '@osd/i18n';
 import { ExpressionFunctionDefinition, Render } from '../../expressions/public';
-import { DrilldownVisParams } from './types';
-import { DrilldownArguments } from './types';
+import { DrilldownArguments, DrilldownVisParams } from './types';
 
 export interface DrilldownVisRenderValue {
   visType: 'drilldown';
@@ -28,20 +27,6 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
     defaultMessage: 'Drilldown visualization',
   }),
   args: {
-    // font: {
-    //   types: ['style'],
-    //   help: i18n.translate('visTypeMarkdown.function.font.help', {
-    //     defaultMessage: 'Font settings.',
-    //   }),
-    //   default: `{font size=12}`,
-    // },
-    // openLinksInNewTab: {
-    //   types: ['boolean'],
-    //   default: false,
-    //   help: i18n.translate('visTypeMarkdown.function.openLinksInNewTab.help', {
-    //     defaultMessage: 'Opens links in new tab',
-    //   }),
-    // },
     cardName: {
       types: ['string'],
       aliases: ['_'],
@@ -58,6 +43,20 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
         defaultMessage: 'Card description',
       }),
     },
+    url: {
+      types: ['string'],
+      aliases: ['_'],
+      required: true,
+      help: i18n.translate('visTypeDrilldown.function.url.help', {
+        defaultMessage: 'URL',
+      }),
+    },
+    cards: {
+      types: [],
+      help: i18n.translate('visTypeDrilldown.function.cards.help', {
+        defaultMessage: 'Cards',
+      }),
+    },
   },
   fn(input, args) {
     return {
@@ -68,8 +67,8 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
         visParams: {
           cardName: args.cardName,
           cardDescription: args.cardDescription,
-          // openLinksInNewTab: args.openLinksInNewTab,
-          // fontSize: parseInt(args.font.spec.fontSize || '12', 10),
+          url: args.url,
+          cards: args.cards,
         },
       },
     };

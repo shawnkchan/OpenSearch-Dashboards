@@ -4,7 +4,6 @@
  */
 
 import React, { useEffect } from 'react';
-import { EuiCard, EuiFlexItem, EuiIcon } from '@elastic/eui';
 import { DrilldownVisParams } from './types';
 
 interface DrilldownVisComponentProps extends DrilldownVisParams {
@@ -14,20 +13,25 @@ interface DrilldownVisComponentProps extends DrilldownVisParams {
 const DrilldownVisComponent = ({
   cardName,
   cardDescription,
+  url,
+  cards,
   renderComplete,
 }: DrilldownVisComponentProps) => {
   useEffect(renderComplete); // renderComplete will be called after each render to signal, that we are done with rendering.
 
   return (
-    <EuiFlexItem>
-      <EuiCard
-        layout="horizontal"
-        icon={<EuiIcon size="xl" type={'dashboardApp'} />}
-        title={cardName}
-        description={cardDescription}
-        onClick={() => {}}
-      />
-    </EuiFlexItem>
+    <>
+      <p>COOL</p>
+      {/* <EuiFlexItem>
+        <EuiCard
+          icon={<EuiIcon size="xl" type="dashboardApp" />}
+          title={cardName}
+          description={cardDescription}
+          onClick={() => window.open(url, '_blank')}
+        />
+      </EuiFlexItem> */}
+      {/* <p>{cardName}</p> */}
+    </>
   );
 };
 

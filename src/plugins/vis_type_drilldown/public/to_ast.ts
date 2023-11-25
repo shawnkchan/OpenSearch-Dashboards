@@ -8,13 +8,15 @@ import { buildExpression, buildExpressionFunction } from '../../expressions/publ
 import { DrilldownVisExpressionFunctionDefinition } from './drilldown_fn';
 
 export const toExpressionAst = (vis: Vis) => {
-  const { cardName, cardDescription } = vis.params;
+  const { cardName, cardDescription, url, cards } = vis.params;
 
   const drilldownVis = buildExpressionFunction<DrilldownVisExpressionFunctionDefinition>(
     'drilldownVis',
     {
       cardName,
       cardDescription,
+      url,
+      cards,
     }
   );
 

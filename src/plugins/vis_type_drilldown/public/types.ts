@@ -18,24 +18,22 @@ export interface AppPluginStartDependencies {
   visualizations: VisualizationsSetup;
 }
 
-// export interface Arguments {
-//   markdown: string;
-//   font: Style;
-//   openLinksInNewTab: boolean;
-// }
-
-// export interface DrilldownVisParams {
-//   markdown: Arguments['markdown'];
-//   openLinksInNewTab: Arguments['openLinksInNewTab'];
-//   fontSize: number;
-// }
+export interface Card {
+  cardName: string;
+  cardDescription: string;
+  url: string;
+}
 
 export interface DrilldownArguments {
   cardName: string;
   cardDescription: string;
+  url: string;
+  cards: Card[];
 }
 
 export interface DrilldownVisParams {
-  cardName: DrilldownArguments['cardName'];
-  cardDescription: DrilldownArguments['cardDescription'];
+  cardName: string;
+  cardDescription: string;
+  url: string;
+  cards: Card[];
 }
