@@ -3,9 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { SavedObjectsClientContract } from 'src/core/public/saved_objects/saved_objects_client';
+import { CoreStart } from 'src/core/server';
 import { NavigationPublicPluginStart } from '../../navigation/public';
 import { VisualizationsSetup } from '../../visualizations/public';
-import { Arguments } from '../../vis_type_markdown/public/types';
 
 export interface VisDrilldownPluginSetup {
   getGreeting: () => string;
@@ -38,4 +39,8 @@ export interface DrilldownArguments {
 export interface DrilldownVisParams {
   cardName: DrilldownArguments['cardName'];
   cardDescription: DrilldownArguments['cardDescription'];
+}
+
+export interface DrilldownServices extends CoreStart {
+  savedObjectsClient: SavedObjectsClientContract;
 }
