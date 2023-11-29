@@ -5,7 +5,6 @@
   "server": true,
   "ui": true,
   "requiredPlugins": [
-    "opensearchDashboardsReact",
     "charts",
     "expressions",
     "visualizations",

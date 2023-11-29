@@ -5,8 +5,7 @@
 
 import { i18n } from '@osd/i18n';
 import { ExpressionFunctionDefinition, Render } from '../../expressions/public';
-import { DrilldownVisParams } from './types';
-import { DrilldownArguments } from './types';
+import { DrilldownVisParams, DrilldownArguments } from './types';
 
 export interface DrilldownVisRenderValue {
   visType: 'drilldown';
