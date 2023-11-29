@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useCallback, Fragment, useState, useEffect } from 'react';
+import React, { useCallback, Fragment, useState, useEffect, useRef } from 'react';
 import {
   EuiPanel,
   EuiTitle,
@@ -30,30 +30,13 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
     services: { http, savedObjects },
   } = useOpenSearchDashboards<DrilldownServices>();
 
-  let saved;
+  interface List {
+    value: string;
+    inputDisplay: string;
+    dropdownDisplay: JSX.Element; // Adjust the type based on the actual type of dropdownDisplay
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      saved = savedObjects?.client.find({
-        type: 'dashboard',
-
-      });
-      const path = (await saved).savedObjects[0]['client'].getPath(['dashboard', (await saved).savedObjects[0].id]).substring(28,);
-      console.log(path);
-      console.log(http.basePath.prepend('/app/dashboards#/view/'+ path));
-      console.log((await saved).savedObjects[0])
-    };
-    fetchData()
-  }, []);
-
-  const onDescriptionUpdate = useCallback(
-    (value: DrilldownVisParams['cardDescription']) => setValue('cardDescription', value),
-    [setValue]
-  );
-
-  const activeVisName = '';
-  const handleVisTypeChange = () => {};
-  const options = [
+  const options = useRef<List[]>([
     {
       value: '1',
       inputDisplay: 'Option 1',
@@ -70,23 +53,49 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
         </Fragment>
       ),
     },
-    {
-      value: '2',
-      inputDisplay: 'Option 2',
-      dropdownDisplay: (
-        <Fragment>
-          <strong>Name</strong>
-          <EuiText size="s" color="subdued">
-            <p className="euiTextColor--subdued">
-              id
-              <br />
-              text
-            </p>
-          </EuiText>
-        </Fragment>
-      ),
-    },
-  ];
+  ]);
+
+  const saved = useRef<any>();
+  const index = useRef<any>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      saved.current = savedObjects?.client.find({
+        type: 'dashboard',
+      });
+      const path = (await saved.current).savedObjects[0]['client']
+        .getPath(['dashboard', (await saved.current).savedObjects[0].id])
+        .substring(28);
+      const savedObjectURL = http.basePath.prepend('/app/dashboards#/view/' + path);
+      options.current = [
+        {
+          value: savedObjectURL,
+          inputDisplay: 'yes',
+          dropdownDisplay: (
+            <Fragment>
+              <strong>Name</strong>
+              <EuiText size="s" color="subdued">
+                <p className="euiTextColor--subdued">
+                  id
+                  <br />
+                  text
+                </p>
+              </EuiText>
+            </Fragment>
+          ),
+        },
+      ];
+    };
+    fetchData();
+  }, []);
+
+  const onDescriptionUpdate = useCallback(
+    (value: DrilldownVisParams['cardDescription']) => setValue('cardDescription', value),
+    [setValue]
+  );
+
+  const activeVisName = '';
+  const handleVisTypeChange = () => {};
 
   return (
     <EuiAccordion buttonContent="Drilldown 1">
@@ -139,7 +148,7 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
           </EuiFlexItem>
 
           <EuiSuperSelect
-            options={options}
+            options={options.current}
             valueOfSelected={activeVisName}
             onChange={handleVisTypeChange}
             fullWidth
