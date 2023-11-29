@@ -17,7 +17,7 @@ import {
 } from '@elastic/eui';
 
 import { VisOptionsProps } from 'src/plugins/vis_default_editor/public';
-import { useOpenSearchDashboards } from 'src/plugins/opensearch_dashboards_react/public';
+import { useOpenSearchDashboards } from '../../opensearch_dashboards_react/public';
 import { DrilldownServices, DrilldownVisParams } from './types';
 
 function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
@@ -27,14 +27,24 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
   );
 
   const {
-    services: { savedObjectsClient },
+    services: { http, savedObjects },
   } = useOpenSearchDashboards<DrilldownServices>();
 
+  let saved;
+
   useEffect(() => {
-    const saved = savedObjectsClient.find({
-      type: 'dashboard',
-    });
-  });
+    const fetchData = async () => {
+      saved = savedObjects?.client.find({
+        type: 'dashboard',
+
+      });
+      const path = (await saved).savedObjects[0]['client'].getPath(['dashboard', (await saved).savedObjects[0].id]).substring(28,);
+      console.log(path);
+      console.log(http.basePath.prepend('/app/dashboards#/view/'+ path));
+      console.log((await saved).savedObjects[0])
+    };
+    fetchData()
+  }, []);
 
   const onDescriptionUpdate = useCallback(
     (value: DrilldownVisParams['cardDescription']) => setValue('cardDescription', value),
