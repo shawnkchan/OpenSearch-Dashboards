@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
-import { EuiFlexGroup, EuiButtonEmpty } from '@elastic/eui';
+import React, { useCallback, useState } from 'react';
+import { EuiFlexGroup, EuiButtonEmpty, EuiFieldText } from '@elastic/eui';
 import { FormattedMessage } from '@osd/i18n/react';
 
 import { VisOptionsProps } from 'src/plugins/vis_default_editor/public';
@@ -12,23 +12,16 @@ import { Card, DrilldownVisParams } from './types';
 import { CardForm } from './card_form';
 
 function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
-  const [formCount, setFormCount] = useState(stateParams.cards.length ?? 1);
-
   const addCardForm = () => {
-    setFormCount(formCount + 1);
-    addCard(); // Also add a new card to the array
-  };
-
-  const addCard = () => {
     const newCard: Card = {
-      cardName: '',
-      cardDescription: '',
-      url: '',
+      cardName: 'newDrilldownCard',
+      cardDescription: 'newDrilldownCard',
+      cardUrl: 'newDrilldownCard',
     };
     setValue('cards', [...stateParams.cards, newCard]);
   };
 
-  const updateCard = (index: number, card: any) => {
+  const updateCard = (index: number, card: Card) => {
     const updatedCards = [...stateParams.cards];
     updatedCards[index] = card;
     setValue('cards', updatedCards);
@@ -43,15 +36,12 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
         responsive={false}
         direction="column"
       >
-        {Array.from({ length: formCount }).map((_, index) => (
-          <CardForm
-            key={index}
-            index={index}
-            cards={stateParams.cards}
-            card={stateParams.cards[index] || { cardName: '', cardDescription: '', url: '' }}
-            onUpdateCard={updateCard}
-          />
-        ))}
+        {stateParams.cards &&
+          stateParams.cards.map((card, index) => (
+            <>
+              <CardForm index={index} card={card} updateCard={updateCard} />
+            </>
+          ))}
         <EuiButtonEmpty size="xs" iconType="plusInCircleFilled" onClick={addCardForm}>
           <FormattedMessage id="visDefaultEditor.aggAdd.addButtonLabel" defaultMessage="Add" />
         </EuiButtonEmpty>

@@ -23,34 +23,10 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
   name: 'drilldownVis',
   type: 'render',
   inputTypes: [],
-  help: i18n.translate('visDrilldown.function.help', {
+  help: i18n.translate('visTypeDrilldown.function.help', {
     defaultMessage: 'Drilldown visualization',
   }),
   args: {
-    cardName: {
-      types: ['string'],
-      aliases: ['_'],
-      required: true,
-      help: i18n.translate('visTypeDrilldown.function.cardName.help', {
-        defaultMessage: 'Card name',
-      }),
-    },
-    cardDescription: {
-      types: ['string'],
-      aliases: ['_'],
-      required: true,
-      help: i18n.translate('visTypeDrilldown.function.cardDescription.help', {
-        defaultMessage: 'Card description',
-      }),
-    },
-    url: {
-      types: ['string'],
-      aliases: ['_'],
-      required: true,
-      help: i18n.translate('visTypeDrilldown.function.url.help', {
-        defaultMessage: 'URL',
-      }),
-    },
     cards: {
       types: [],
       help: i18n.translate('visTypeDrilldown.function.cards.help', {
@@ -65,9 +41,6 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
       value: {
         visType: 'drilldown',
         visParams: {
-          cardName: args.cardName,
-          cardDescription: args.cardDescription,
-          url: args.url,
           cards: args.cards,
         },
       },

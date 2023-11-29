@@ -13,21 +13,18 @@ export const drillDownVisDefinition = {
   name: 'drilldown',
   title: 'Drilldown',
   isAccessible: true,
-  icon: 'dashboardApp',
+  icon: 'logstashFilter',
   description: i18n.translate('visTypeMarkdown.markdownDescription', {
     defaultMessage: 'I LOVE drilldown!',
   }),
   toExpressionAst,
   visConfig: {
     defaults: {
-      cardName: '',
-      cardDescription: '',
-      url: '',
       cards: [
         {
           cardName: '',
           cardDescription: '',
-          url: '',
+          cardUrl: '',
         },
       ],
     },

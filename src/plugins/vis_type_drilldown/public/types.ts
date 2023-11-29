@@ -5,11 +5,10 @@
 
 import { NavigationPublicPluginStart } from '../../navigation/public';
 import { VisualizationsSetup } from '../../visualizations/public';
-import { Arguments } from '../../vis_type_markdown/public/types';
 
-export interface VisDrilldownPluginSetup {
-  getGreeting: () => string;
-}
+// export interface VisDrilldownPluginSetup {
+//   getGreeting: () => string;
+// }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface VisDrilldownPluginStart {}
 
@@ -21,19 +20,13 @@ export interface AppPluginStartDependencies {
 export interface Card {
   cardName: string;
   cardDescription: string;
-  url: string;
+  cardUrl: string;
 }
 
 export interface DrilldownArguments {
-  cardName: string;
-  cardDescription: string;
-  url: string;
   cards: Card[];
 }
 
 export interface DrilldownVisParams {
-  cardName: string;
-  cardDescription: string;
-  url: string;
   cards: Card[];
 }

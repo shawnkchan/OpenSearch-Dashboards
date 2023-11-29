@@ -1,7 +1,0 @@
-{
-  "prefix": "visTypeDrilldown",
-  "paths": {
-    "visTypeDrilldown": "."
-  },
-  "translations": ["translations/ja-JP.json"]
-}

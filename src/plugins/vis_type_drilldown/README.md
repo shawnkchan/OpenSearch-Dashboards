@@ -1,11 +1,6 @@
 # vis_type_drilldown
 
-A OpenSearch Dashboards plugin
+This drilldown plugin allows users to design their own navigation controls, customized to fit their specific preferences and workflow requirements.
+Please refer to [Drilldown functionality for dashboards](https://github.com/opensearch-project/OpenSearch-Dashboards/issues/1308)
 
 ---
-
-## Development
-
-See the [OpenSearch Dashboards contributing
-guide](https://github.com/opensearch-project/OpenSearch-Dashboards/blob/main/CONTRIBUTING.md) for instructions
-setting up your development environment.
