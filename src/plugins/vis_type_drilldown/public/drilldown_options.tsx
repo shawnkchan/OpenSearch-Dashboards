@@ -37,6 +37,7 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
             <EuiTitle size="xs">
               <h2>
                 <label
+                  // test
                   htmlFor={i18n.translate('drilldownVisInput', {
                     defaultMessage: 'Drilldown visualisation input',
                   })}
