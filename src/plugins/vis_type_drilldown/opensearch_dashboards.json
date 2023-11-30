@@ -4,6 +4,12 @@
   "opensearchDashboardsVersion": "opensearchDashboards",
   "server": true,
   "ui": true,
-  "requiredPlugins": ["charts", "expressions", "visualizations", "visDefaultEditor"],
+  "requiredPlugins": [
+    "charts",
+    "expressions",
+    "visualizations",
+    "visDefaultEditor",
+    "opensearchDashboardsReact"
+  ],
   "optionalPlugins": []
 }
