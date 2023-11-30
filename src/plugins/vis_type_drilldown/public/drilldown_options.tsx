@@ -114,21 +114,13 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
       {stateParams.cards &&
         stateParams.cards.map((card, index) => (
           <>
-            <CardForm index={index} card={card} updateCard={updateCard} />
-            <EuiFlexItem>
-              <EuiTitle size="xs">
-                <h2>
-                  <label htmlFor="drilldownVisInput">Select a Destination</label>
-                </h2>
-              </EuiTitle>
-            </EuiFlexItem>
-
-            <EuiSuperSelect
+            <CardForm
+              index={index}
+              card={card}
+              updateCard={updateCard}
               options={options.current}
               valueOfSelected={activeVisName}
               onChange={handleVisTypeChange}
-              fullWidth
-              data-test-subj="chartPicker"
             />
           </>
         ))}

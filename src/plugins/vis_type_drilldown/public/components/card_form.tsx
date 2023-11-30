@@ -12,6 +12,7 @@ import {
   EuiFieldText,
   EuiAccordion,
   EuiFlexGroup,
+  EuiSuperSelect,
 } from '@elastic/eui';
 import { Card } from '../types';
 
@@ -19,9 +20,19 @@ interface CardFormProps {
   index: number;
   card: Card;
   updateCard: (index: number, card: Card) => void;
+  options: any;
+  activeVisName: string;
+  handleVisTypeChange: () => void;
 }
 
-const CardForm = ({ index, card, updateCard }: CardFormProps) => {
+const CardForm = ({
+  index,
+  card,
+  updateCard,
+  options,
+  valueOfSelected,
+  onChange,
+}: CardFormProps) => {
   return (
     <EuiAccordion
       id={index}
@@ -92,6 +103,22 @@ const CardForm = ({ index, card, updateCard }: CardFormProps) => {
               fullWidth={true}
             />
           </EuiFlexItem>
+
+          <EuiFlexItem>
+            <EuiTitle size="xs">
+              <h2>
+                <label htmlFor="drilldownVisInput">Select a Destination</label>
+              </h2>
+            </EuiTitle>
+          </EuiFlexItem>
+
+          <EuiSuperSelect
+            options={options}
+            valueOfSelected={valueOfSelected}
+            onChange={onChange}
+            fullWidth={true}
+            data-test-subj="chartPicker"
+          />
         </EuiFlexGroup>
       </EuiPanel>
     </EuiAccordion>
