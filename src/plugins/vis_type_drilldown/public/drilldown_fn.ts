@@ -28,7 +28,7 @@ export const createDrilldownVisFn = (): DrilldownVisExpressionFunctionDefinition
   }),
   args: {
     cards: {
-      types: [],
+      types: ['string'],
       help: i18n.translate('visTypeDrilldown.function.cards.help', {
         defaultMessage: 'Cards',
       }),

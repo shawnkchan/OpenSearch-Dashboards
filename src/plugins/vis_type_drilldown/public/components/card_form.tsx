@@ -21,8 +21,8 @@ interface CardFormProps {
   card: Card;
   updateCard: (index: number, card: Card) => void;
   options: any;
-  activeVisName: string;
-  handleVisTypeChange: () => void;
+  valueOfSelected: string;
+  onChange: () => void;
 }
 
 const CardForm = ({
@@ -35,7 +35,7 @@ const CardForm = ({
 }: CardFormProps) => {
   return (
     <EuiAccordion
-      id={index}
+      id={String(index)}
       buttonContent={`Drilldown ${index + 1}`}
       paddingSize="s"
       initialIsOpen={true}

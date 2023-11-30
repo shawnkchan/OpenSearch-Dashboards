@@ -8,17 +8,18 @@ import { EuiCard, EuiFlexItem, EuiIcon } from '@elastic/eui';
 import { DrilldownVisParams, Card } from './types';
 
 interface DrilldownVisComponentProps extends DrilldownVisParams {
-  cards: Card[];
   renderComplete: () => void;
 }
 
 const DrilldownVisComponent = ({ cards, renderComplete }: DrilldownVisComponentProps) => {
   useEffect(renderComplete); // renderComplete will be called after each render to signal, that we are done with rendering.
 
+  const parsedCardData = JSON.parse(cards);
+
   return (
     <>
-      {cards &&
-        cards.map((card, index) => (
+      {parsedCardData &&
+        parsedCardData.map((card: Card, index: number) => (
           <EuiFlexItem key={index}>
             <EuiCard
               icon={<EuiIcon size="xl" type="dashboardApp" />}

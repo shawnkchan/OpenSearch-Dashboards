@@ -13,7 +13,7 @@ export const toExpressionAst = (vis: Vis) => {
   const drilldownVis = buildExpressionFunction<DrilldownVisExpressionFunctionDefinition>(
     'drilldownVis',
     {
-      cards,
+      cards: JSON.stringify(cards),
     }
   );
 
