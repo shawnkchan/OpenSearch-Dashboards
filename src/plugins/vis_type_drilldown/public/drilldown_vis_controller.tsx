@@ -5,9 +5,10 @@
 
 import React, { useEffect } from 'react';
 import { EuiCard, EuiFlexItem, EuiIcon } from '@elastic/eui';
-import { DrilldownVisParams } from './types';
+import { DrilldownVisParams, Card } from './types';
 
 interface DrilldownVisComponentProps extends DrilldownVisParams {
+  cards: Card[];
   renderComplete: () => void;
 }
 

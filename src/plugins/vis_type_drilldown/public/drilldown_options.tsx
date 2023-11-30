@@ -3,29 +3,32 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useCallback, useState } from 'react';
-import { EuiFlexGroup, EuiButtonEmpty, EuiFieldText } from '@elastic/eui';
+import React, { useCallback } from 'react';
+import { EuiFlexGroup, EuiButtonEmpty } from '@elastic/eui';
 import { FormattedMessage } from '@osd/i18n/react';
 
 import { VisOptionsProps } from 'src/plugins/vis_default_editor/public';
 import { Card, DrilldownVisParams } from './types';
-import { CardForm } from './card_form';
+import { CardForm } from './components/card_form';
 
 function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVisParams>) {
-  const addCardForm = () => {
+  const updateCard = useCallback(
+    (index: number, card: Card) => {
+      const updatedCards = [...stateParams.cards];
+      updatedCards[index] = card;
+      setValue('cards', updatedCards);
+    },
+    [stateParams.cards, setValue]
+  );
+
+  const addCardForm = useCallback(() => {
     const newCard: Card = {
       cardName: 'newDrilldownCard',
       cardDescription: 'newDrilldownCard',
       cardUrl: 'newDrilldownCard',
     };
     setValue('cards', [...stateParams.cards, newCard]);
-  };
-
-  const updateCard = (index: number, card: Card) => {
-    const updatedCards = [...stateParams.cards];
-    updatedCards[index] = card;
-    setValue('cards', updatedCards);
-  };
+  }, [stateParams.cards, setValue]);
 
   return (
     <>
