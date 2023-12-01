@@ -14,6 +14,7 @@ import {
   EuiFlexGroup,
   EuiSuperSelect,
 } from '@elastic/eui';
+import { i18n } from '@osd/i18n';
 import { Card } from '../types';
 
 interface CardFormProps {
@@ -45,7 +46,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Card Name</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Input',
+                  })}
+                >
+                  Card Name
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
@@ -65,7 +72,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Description</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Input',
+                  })}
+                >
+                  Description
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
