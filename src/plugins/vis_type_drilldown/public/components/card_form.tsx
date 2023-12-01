@@ -120,7 +120,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Select a Destination</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Input',
+                  })}
+                >
+                  Select a Destination
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
