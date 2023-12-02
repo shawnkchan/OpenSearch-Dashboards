@@ -14,6 +14,7 @@ import {
   EuiFlexGroup,
   EuiSuperSelect,
 } from '@elastic/eui';
+import { i18n } from '@osd/i18n';
 import { Card } from '../types';
 
 interface CardFormProps {
@@ -45,7 +46,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Card Name</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation CardName',
+                  })}
+                >
+                  Card Name
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
@@ -65,7 +72,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Description</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Description',
+                  })}
+                >
+                  Description
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
@@ -86,7 +99,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Url</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Url',
+                  })}
+                >
+                  Url
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
@@ -107,7 +126,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Select a Destination</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Destination',
+                  })}
+                >
+                  Select a Destination
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
