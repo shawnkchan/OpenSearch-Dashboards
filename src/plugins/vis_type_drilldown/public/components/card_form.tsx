@@ -101,7 +101,7 @@ const CardForm = ({
               <h2>
                 <label
                   htmlFor={i18n.translate('drilldownVisInput', {
-                    defaultMessage: 'Drilldown Visualisation Input',
+                    defaultMessage: 'Drilldown Visualisation Url',
                   })}
                 >
                   Url
