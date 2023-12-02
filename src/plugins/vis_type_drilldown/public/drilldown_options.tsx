@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useCallback, Fragment, useEffect, useRef } from 'react';
+import React, { useCallback, Fragment, useEffect, useRef, useState } from 'react';
 import {
   EuiTitle,
   EuiFlexGroup,
@@ -103,6 +103,21 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
   const activeVisName = '';
   const handleVisTypeChange = () => {};
 
+  // Variables and methods for error handling
+  const [showErrors, setShowErrors] = useState(false);
+  const [emptyField, setEmptyField] = useState(false);
+
+  const onButtonClick = () => {
+    if (emptyField) {
+      setShowErrors(true);
+    }
+  };
+
+  const handleClick = () => {
+    addCardForm();
+    onButtonClick();
+  };
+
   return (
     <EuiFlexGroup
       className="visEditorSidebar"
@@ -121,10 +136,12 @@ function DrilldownOptions({ stateParams, setValue }: VisOptionsProps<DrilldownVi
               options={options.current}
               valueOfSelected={activeVisName}
               onChange={handleVisTypeChange}
+              showErrors={showErrors}
+              setEmptyField={setEmptyField}
             />
           </>
         ))}
-      <EuiButtonEmpty size="xs" iconType="plusInCircleFilled" onClick={addCardForm}>
+      <EuiButtonEmpty size="xs" iconType="plusInCircleFilled" onClick={handleClick}>
         <FormattedMessage id="visDefaultEditor.aggAdd.addButtonLabel" defaultMessage="Add" />
       </EuiButtonEmpty>
     </EuiFlexGroup>

@@ -27,6 +27,8 @@ interface CardFormProps {
   options: any;
   valueOfSelected: string;
   onChange: () => void;
+  showErrors: boolean;
+  setEmptyField: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 }
 
 const CardForm = ({
@@ -36,6 +38,8 @@ const CardForm = ({
   options,
   valueOfSelected,
   onChange,
+  showErrors,
+  setEmptyField,
 }: CardFormProps) => {
   // Variables for radio buttons
   const [radioIdSelected, setRadioIdSelected] = useState('test2');
@@ -55,6 +59,9 @@ const CardForm = ({
     },
   ];
 
+  // Variables for errors
+  const errors = ['cardNameError', 'descriptionError'];
+
   return (
     <EuiAccordion
       id={String(index)}
@@ -64,15 +71,21 @@ const CardForm = ({
     >
       <EuiPanel paddingSize="s">
         {/* TODO: @ShawnkChan Logic for invalid form */}
-        <EuiForm>
+        <EuiForm isInvalid={showErrors} error={errors}>
           {/* Name of Drilldown configuration */}
-          <EuiFormRow label={i18n.translate('Card Name', { defaultMessage: 'Card Name' })}>
+          <EuiFormRow
+            label={i18n.translate('Card Name', { defaultMessage: 'Card Name' })}
+            isInvalid={showErrors}
+            error={errors[0]}
+          >
             <EuiFieldText
               id="drilldownVisInput"
-              className="eui-fullHeight"
               value={card.cardName}
               onChange={({ target: { value } }) => {
                 updateCard(index, { ...card, cardName: value });
+                if (value.trim() === '') {
+                  setEmptyField(true);
+                }
               }}
               fullWidth={true}
             />
