@@ -48,7 +48,7 @@ const CardForm = ({
               <h2>
                 <label
                   htmlFor={i18n.translate('drilldownVisInput', {
-                    defaultMessage: 'Drilldown Visualisation Input',
+                    defaultMessage: 'Card Name',
                   })}
                 >
                   Card Name
@@ -74,7 +74,7 @@ const CardForm = ({
               <h2>
                 <label
                   htmlFor={i18n.translate('drilldownVisInput', {
-                    defaultMessage: 'Drilldown Visualisation Input',
+                    defaultMessage: 'EG',
                   })}
                 >
                   Description
@@ -99,7 +99,13 @@ const CardForm = ({
           <EuiFlexItem>
             <EuiTitle size="xs">
               <h2>
-                <label htmlFor="drilldownVisInput">Url</label>
+                <label
+                  htmlFor={i18n.translate('drilldownVisInput', {
+                    defaultMessage: 'Drilldown Visualisation Input',
+                  })}
+                >
+                  Url
+                </label>
               </h2>
             </EuiTitle>
           </EuiFlexItem>
