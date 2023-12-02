@@ -74,7 +74,7 @@ const CardForm = ({
               <h2>
                 <label
                   htmlFor={i18n.translate('drilldownVisInput', {
-                    defaultMessage: 'EG',
+                    defaultMessage: 'Drilldown Visualisation Description',
                   })}
                 >
                   Description
